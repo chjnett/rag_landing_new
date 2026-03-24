@@ -1,16 +1,12 @@
 "use client";
 
-import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import { Sidebar } from './Navbar';
-import { MobileNav } from './MobileNav';
-import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { cn } from '@/lib/utils';
+import { Breadcrumb } from '@/components/ui/Breadcrumb';
 
 export function LayoutWrapper({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
-    const [isCollapsed, setIsCollapsed] = useState(true);
 
     // Dynamic breadcrumb items
     const pathSegments = pathname.split('/').filter(Boolean);
@@ -32,14 +28,13 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
     });
 
     return (
-        <div className="flex min-h-screen bg-background text-foreground overflow-hidden transition-colors duration-300">
-            <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
-            <main className={cn(
-                "flex-1 p-4 lg:p-8 relative transition-all duration-500 ease-in-out flex flex-col mb-20 lg:mb-0",
-                isCollapsed ? "lg:ml-20" : "lg:ml-64",
-                "ml-0"
-            )}>
-                {pathname !== '/' && <Breadcrumb items={breadcrumbItems} />}
+        <div className="flex min-h-screen bg-background text-foreground overflow-x-hidden">
+            <main className="flex-1 relative transition-all duration-500 flex flex-col w-full">
+                {pathname !== '/' && (
+                    <div className="px-6 py-4">
+                        <Breadcrumb items={breadcrumbItems} />
+                    </div>
+                )}
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={pathname}
@@ -47,14 +42,12 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="w-full max-w-7xl mx-auto"
+                        className="w-full h-full"
                     >
                         {children}
                     </motion.div>
                 </AnimatePresence>
             </main>
-            <MobileNav />
         </div>
     );
 }
-

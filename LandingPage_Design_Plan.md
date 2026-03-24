@@ -1,49 +1,47 @@
-# Landing Page Design Plan & Specification
+# AI Solution Company Landing Page Plan & Specification
 
-현대적인 대시보드 디자인을 계승한 shadcn/ui 기반 랜딩 페이지 구축 계획입니다.
+현대적인 대시보드 디자인을 계승한 **AI Solution Company (RAG, AIOps, Cloud, MLOps, DevOps 전문)** 랜딩 페이지 구축 계획입니다.
 
 ## 1. 디자인 컨셉
-현재 대시보드의 **GitHub 스타일 미니멀리즘**과 **Glassmorphism** 효과를 전면적으로 적용합니다.
-- **색상 팔레트**: 다크 모드 중심 (`#09090b` 배경, `rgba(255,255,255,0.05)` 테두리).
-- **효과**: `backdrop-blur`, `radial-gradient` 배경, `card-minimal` 스타일 계승.
-- **컴포넌트**: shadcn/ui(Radix UI)를 활용한 정교한 인터랙션.
+전문적이고 신뢰감 있는 **AI Enterprise** 느낌의 디자인을 지향하며, 기존 대시보드의 **Glassmorphism** 효과를 전문적인 비즈니스 톤으로 확장합니다.
+- **색상 팔레트**: 딥 다크 모드 (`#020202` 배경, `rgba(255,255,255,0.08)` 테두리), 포인트 컬러로 `Primary AI Blue` 또는 `Neon Violet` 활용.
+- **효과**: 프리미엄 메탈릭 질감, 데이터 스트림 배경 효과, 카드 기반의 정돈된 레이아웃.
+- **아이덴티티**: 기술적 깊이(Infrastructure)와 미래지향성(AI)이 공존하는 분위기.
 
-## 2. 주요 섹션 구성
+## 2. 주요 섹션 및 서비스 구성
 
-### 1) Hero Section
-- **구성**: 서비스의 핵심 가치를 담은 헤드라인과 서브타이틀.
-- **디자인**: 현재 대시보드 사이드바의 프로필 스타일과 유사한 유리 질감의 버튼과 아바타 활용.
-- **애니메이션**: Framer Motion을 이용한 부드러운 입학 효과.
+### 1) Hero Section: "The Future of AI Infrastructure"
+- **메시지**: RAG부터 MLOps까지, 비즈니스 가치를 창출하는 AI 인프라 솔루션.
+- **디자인**: 추상적인 AI 프로세스 시각화(Framer Motion)와 함께 핵심 기술 역량(AIOps, Cloud) 강조.
 
-### 2) Feature Section (Dashboard Preview)
-- **구성**: 현재 대시보드의 주요 기능(Contribution Graph, Workflow 등)을 미리보기 형태로 노출.
-- **디자인**: 실제 대시보드 컴포넌트를 카드 형태로 배치하여 일관성 유지.
+### 2) Core Solutions (RAG & AI Solutions)
+- **RAG (Retrieval-Augmented Generation)**: 기업 맞춤형 지식 베이스 기반 LLM 구축 솔루션 설명.
+- **AIOps**: AI 기술을 활용한 자율 운영 및 장애 예측 시스템 강점 부각.
+- **MLOps & DevOps**: 지속적인 개선과 자동화가 가능한 안정적인 배포 파이프라인.
 
-### 3) Tech Stack Section (핵심 유지 사항)
-- **구성**: 현재 `TechStackCard` 컴포넌트를 100% 동일하게 유지.
+### 3) Tech Stack (Proven Expertise - 핵심 유지 및 확장)
+- **구성**: 현재 `TechStackCard` 컴포넌트를 사용하여 회사가 보유한 핵심 기술 스택(AWS, Terraform, Kubernetes, PyTorch, LangChain 등) 노출.
 - **디자인**: 
-    - `recharts` 기반의 Radar Chart 포함.
-    - 테두리 그라데이션 및 유리 질감 카드.
-    - 태그 스타일 및 아이콘 배치 유지.
-- **인터랙션**: 클릭 시 상세 경험(Experience)을 보여주는 Framer Motion 기반 모달 유지.
+    - `recharts` Radar Chart를 통해 각 도메인별(AI, Infra, Cloud) 전문성 시각화.
+    - **Cloud & DevOps Card**: 인프라 자동화 도구 강조.
+    - **AI & RAG Card**: LLM Framework 및 Vector DB 전문성 강조.
+- **인터랙션**: 클릭 시 해당 기술을 활용한 구체적인 성공 사례(Case Studies) 팝업 제공.
 
-### 4) Stats / Activity Section
-- **구성**: `ContributionGraph` 및 `Contribution Activity` 타임라인 노출.
-- **의미**: 실시간 데이터 시각화 역량을 강조하는 랜딩 포인트.
+### 4) Infrastructure Pillar (Cloud & MLOps)
+- **구성**: 하이브리드 클라우드 구축 역량과 대규모 모델 서빙을 위한 MLOps 파이프라인 도식화.
+- **디자인**: 사이드바의 워크플로우 엔진 느낌을 랜딩 페이지 중앙으로 가져와 자동화 프로세스 시각화.
 
-### 5) Call to Action (CTA)
-- **구성**: "시작하기" 또는 "대시보드 보기" 버튼.
-- **디자인**: `ChatInterface`와 유사한 떠 있는 하단 버튼이나 메인 액션 버튼 사용.
+### 5) Trusted By / Contact (CTA)
+- **구성**: "Consult with AI Experts" 버튼과 함께 전문 상담 유도.
+- **디자인**: `ChatInterface` 스타일의 플로팅 상담 봇 배치 (AI 상담 컨셉).
 
-## 3. 기술 스택
+## 3. 기술 스택 (기존 유지)
 - **Framework**: Next.js 16 (App Router)
 - **Styling**: Tailwind CSS 4, shadcn/ui
-- **Animation**: Framer Motion
-- **Charts**: Recharts
+- **Animation**: Framer Motion (데이터 흐름 및 파티클 시스템)
+- **Charts**: Recharts (전문성 지표 시각화)
 
 ## 4. 구현 로직 매핑
-- **Tech Stack Data**: `useContentStore`의 데이터를 그대로 가져와서 렌더링.
-- **Layout**: 기존 `LayoutWrapper`를 확장하거나 랜딩용 전용 레이아웃 구성.
-
----
-이 계획을 바탕으로 파일을 생성하거나 수정을 진행하겠습니다. 추가로 수정하고 싶은 부분이 있으신가요?
+- **Tech Stack Data**: `src/store/useContentStore`에 RAG, AIOps 등 회사 기술 정보 추가하여 연동.
+- **Component**: `TechStackCard`의 `proficiency` 데이터를 회사 역량 지표로 활용.
+- **Workflow**: `WorkflowOverlay`를 비즈니스 컨설팅 또는 솔루션 로드맵 보여주기용으로 재사용.

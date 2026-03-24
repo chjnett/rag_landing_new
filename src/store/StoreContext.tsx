@@ -137,14 +137,13 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
                     return merged;
                 };
 
-                const mergedTechStacks = mergeById(parsed.techStacks, DEFAULT_CONTENT.techStacks);
                 const mergedProjects = mergeById(parsed.projects, DEFAULT_CONTENT.projects);
                 const mergedBlogPosts = mergeById(parsed.blogPosts, DEFAULT_CONTENT.blogPosts);
 
                 setContent(prev => ({
                     ...prev,
                     ...parsed,
-                    techStacks: mergedTechStacks,
+                    techStacks: DEFAULT_CONTENT.techStacks, // Always force the new company tech stacks
                     projects: mergedProjects,
                     blogPosts: mergedBlogPosts
                 }));
