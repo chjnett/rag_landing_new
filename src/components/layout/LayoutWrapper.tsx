@@ -28,7 +28,7 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
     });
 
     return (
-        <div className="flex min-h-screen bg-background text-foreground overflow-x-hidden">
+        <div className="flex min-h-screen bg-background text-foreground overflow-clip">
             <main className="flex-1 relative transition-all duration-500 flex flex-col w-full">
                 {pathname !== '/' && (
                     <div className="px-6 py-4">

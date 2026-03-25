@@ -31,7 +31,7 @@ export function ChatInterface({ onSendMessage }: ChatInterfaceProps) {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="Ask anything about your project... (e.g. 'How does RAG work?')"
-                    className="flex-1 bg-transparent border-none focus:ring-0 text-sm px-4 placeholder:text-muted-foreground h-12"
+                    className="flex-1 bg-transparent border-none focus:ring-0 text-sm px-4 text-foreground placeholder:text-muted-foreground h-12 outline-none"
                 />
                 <button
                     type="submit"

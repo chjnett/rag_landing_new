@@ -5,9 +5,12 @@ import { motion } from 'framer-motion';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { useContentStore } from '@/store/useContentStore';
 import { TechStackCard } from '@/components/dashboard/TechStackCard';
+import { ServiceCards } from '@/components/dashboard/ServiceCards';
+import { WorkflowOverlay } from '@/components/dashboard/WorkflowOverlay';
 
 export default function LandingPage() {
   const [isLoading, setIsLoading] = React.useState(true);
+  const [activeWorkflow, setActiveWorkflow] = React.useState<string | null>(null);
   const { content, isLoaded: contentLoaded } = useContentStore();
 
   React.useEffect(() => {
@@ -18,7 +21,14 @@ export default function LandingPage() {
   }, [contentLoaded]);
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground overflow-hidden">
+    <div className="relative min-h-screen bg-background text-foreground overflow-clip">
+
+      <WorkflowOverlay
+        isOpen={!!activeWorkflow}
+        onClose={() => setActiveWorkflow(null)}
+        serviceName={activeWorkflow || "AI Solution"}
+      />
+
       {/* Background Effects */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-white/5 blur-[100px]" />
@@ -76,6 +86,9 @@ export default function LandingPage() {
           </motion.div>
         </section>
 
+        {/* Services Cards Section */}
+        <ServiceCards onSelectService={setActiveWorkflow} />
+
         {/* 2. Core Capabilities (Tech Stacks) */}
         <section className="py-32" id="solutions">
           <div className="text-center mb-16 space-y-4">
@@ -103,7 +116,7 @@ export default function LandingPage() {
               ))
             ) : (
               content.techStacks.map((stack: any, index: number) => (
-                <div key={stack.id} className={index === 0 || index === 3 ? "lg:col-span-2" : "lg:col-span-1"}>
+                <div key={stack.id} className="col-span-1">
                   <TechStackCard stack={stack} index={index} />
                 </div>
               ))
