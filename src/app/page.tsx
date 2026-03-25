@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { useContentStore } from '@/store/useContentStore';
 import { TechStackCard } from '@/components/dashboard/TechStackCard';
@@ -12,6 +12,9 @@ export default function LandingPage() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [activeWorkflow, setActiveWorkflow] = React.useState<string | null>(null);
   const { content, isLoaded: contentLoaded } = useContentStore();
+  const { scrollY } = useScroll();
+  const heroImageY = useTransform(scrollY, [0, 1000], [0, 200]);
+  const heroImageScale = useTransform(scrollY, [0, 1000], [1, 1.1]);
 
   React.useEffect(() => {
     if (contentLoaded) {
@@ -38,51 +41,78 @@ export default function LandingPage() {
 
       <div className="relative z-10 container mx-auto px-6 pt-32 pb-24">
         {/* 1. Hero Section */}
-        <section className="flex flex-col items-center justify-center text-center min-h-[60vh] space-y-8">
+        <section className="flex flex-col items-center justify-center text-center pt-20 pb-40 space-y-12 overflow-hidden">
+          <div className="space-y-6 relative z-10">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground backdrop-blur-md"
+            >
+              <span className="w-1 h-1 rounded-full bg-primary animate-pulse" />
+              Enterprise AI Infrastructure
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-6xl md:text-8xl font-black tracking-[-0.04em] leading-[0.95] text-white"
+            >
+              The Future of <br className="hidden md:block" />
+              <span className="text-white/40">
+                AI Solutions & MLOps
+              </span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto font-medium leading-relaxed tracking-tight"
+            >
+              RAG 기반 맞춤형 LLM부터 AIOps, Cloud 인프라까지.<br />
+              비즈니스 가치를 극대화하는 엔드투엔드 AI 기술 솔루션.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="flex items-center justify-center gap-4 pt-4"
+            >
+              <button className="px-8 py-4 rounded-full bg-white text-black font-bold hover:bg-white/90 transition-all duration-300 hover:scale-105 active:scale-95">
+                Consult with AI Experts
+              </button>
+              <button className="px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition-all duration-300 backdrop-blur-md">
+                Explore Architecture
+              </button>
+            </motion.div>
+          </div>
+
+          {/* Cinematic Hero Image */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted/50 border border-border text-sm font-medium text-muted-foreground backdrop-blur-md"
+            style={{ y: heroImageY, scale: heroImageScale }}
+            initial={{ opacity: 0, y: 100, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full max-w-6xl mx-auto relative mt-12"
           >
-            <span className="w-2 h-2 rounded-full bg-foreground" />
-            Enterprise AI Infrastructure
-          </motion.div>
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-[40px] blur-2xl opacity-50 group-hover:opacity-100 transition duration-1000" />
+              <div className="relative aspect-[21/9] w-full overflow-hidden rounded-[32px] border border-white/10 bg-black/50 backdrop-blur-3xl shadow-2xl">
+                <img
+                  src="/main.png"
+                  alt="AI Infrastructure Visual"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+              </div>
+            </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-            className="text-5xl md:text-7xl font-black tracking-tighter text-foreground"
-          >
-            The Future of <br className="hidden md:block" />
-            <span className="text-foreground/80">
-              AI Solutions & MLOps
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto font-medium"
-          >
-            RAG 기반 맞춤형 LLM부터 AIOps, Cloud 인프라, MLOps, DevOps까지.<br />
-            비즈니스 가치를 극대화하는 엔드투엔드 AI 기술 솔루션을 제공합니다.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-            className="flex items-center gap-4 pt-8"
-          >
-            <button className="px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition-colors">
-              Consult with AI Experts
-            </button>
-            <button className="px-8 py-4 rounded-xl bg-background border border-input text-foreground font-bold hover:bg-accent hover:text-accent-foreground transition-colors backdrop-blur-md">
-              Explore Architecture
-            </button>
+            {/* Visual Accents */}
+            <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/10 blur-[100px] rounded-full" />
+            <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-purple-500/10 blur-[100px] rounded-full" />
           </motion.div>
         </section>
 
